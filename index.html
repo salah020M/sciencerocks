@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Science Landing Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bounce-in {
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0px);
+      }
+      100% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .glow-hover:hover {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-500 via-purple-500 to-red-500 text-white px-6 py-12 font-sans">
+
+  <main class="min-h-screen">
+    <section class="max-w-5xl mx-auto text-center fade-in-up">
+      <img src="https://orchestration.civitai.com/v2/consumer/blobs/8R6WN7806MBCTBF2K0F50Q4TM0.jpeg" alt="Science Banner" class="rounded-xl shadow-2xl mb-10 w-full h-80 object-cover">
+      <h1 class="text-5xl font-bold mb-6 bounce-in text-yellow-300 glow-hover">Explore the Frontiers of Science</h1>
+      <p class="text-lg mb-8 max-w-2xl mx-auto bounce-in text-cyan-200 glow-hover">
+        Dive into the world of cutting-edge research, innovative discoveries, and scientific breakthroughs that are shaping our future.
+      </p>
+      <button class="text-lg px-6 py-4 bg-yellow-400 hover:bg-yellow-300 text-black transition-transform transform hover:scale-110 rounded shadow-xl pulse">
+        Get Started
+      </button>
+    </section>
+
+    <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+      <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl hover:scale-105 transform transition-transform feature">
+        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-40 object-cover rounded mb-4" alt="Research">
+        <h3 class="text-xl font-semibold mb-2 bounce-in ">Innovative Research</h3>
+        <p class="text-white/80">Stay updated with groundbreaking studies across physics, biology, chemistry, and more.</p>
+      </div>
+      <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl hover:scale-105 transform transition-transform feature">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwPV1Xsktzie6ijfXTo1qNq9jkeml7aLOiFjLD1jHGYqORiYNRu_9R8oOxPaISGj7NFQ&usqp=CAU" class="w-full h-40 object-cover rounded mb-4" alt="Discoveries">
+        <h3 class="text-xl font-semibold mb-2 bounce-in text-lime-300 glow-hover">Scientific Discoveries</h3>
+        <p class="text-white/80">Learn about new discoveries that are changing the way we understand the world.</p>
+      </div>
+      <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl hover:scale-105 transform transition-transform feature">
+        <img src="https://media.licdn.com/dms/image/v2/D5612AQEDRFQqBvpE6w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1721191115960?e=2147483647&v=beta&t=JkS0PtlHFAORnABimfId8Dx72dXMoZU8yOmFoTC-6Pk" class="w-full h-40 object-cover rounded mb-4" alt="Knowledge">
+        <h3 class="text-xl font-semibold mb-2 bounce-in text-orange-300 glow-hover">Knowledge Hub</h3>
+        <p class="text-white/80">Access a library of resources curated by leading scientists and researchers.</p>
+      </div>
+    </section>
+
+    <section class="mt-32 max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-8 bounce-in text-pink-300 glow-hover">Have Questions? Get in Touch</h2>
+      <form id="contactForm" class="grid gap-6 text-left">
+        <input name="name" placeholder="Your Name" class="bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" required />
+        <input name="email" type="email" placeholder="Your Email" class="bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" required />
+        <textarea name="message" placeholder="Your Message" class="bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" rows="5" required></textarea>
+        <button type="submit" class="bg-yellow-400 hover:bg-yellow-300 text-black text-lg py-3 rounded">
+          Send Message
+        </button>
+        <p id="confirmation" class="text-green-200 text-xl hidden">Thank you for your message! We'll get back to you soon.</p>
+      </form>
+    </section>
+
+    <section class="mt-32 max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 bounce-in text-teal-300 glow-hover">Subscribe for Updates</h2>
+      <form id="subscribeForm" class="grid md:grid-cols-3 gap-4 text-left">
+        <input name="email" type="email" placeholder="Enter your email" class="md:col-span-2 bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" required />
+        <button type="submit" class="bg-green-500 hover:bg-green-400 text-lg py-3 rounded">
+          Subscribe
+        </button>
+      </form>
+      <p id="subConfirmation" class="text-green-200 text-xl hidden mt-4">Thanks for subscribing!</p>
+    </section>
+
+    <section class="mt-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lab Tech" class="w-full h-64 object-cover rounded-2xl shadow-lg transition-transform transform hover:scale-105" />
+      <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Microscope Research" class="w-full h-64 object-cover rounded-2xl shadow-lg transition-transform transform hover:scale-105" />
+      <img src="https://d3lzcn6mbbadaf.cloudfront.net/media/details/ANI-20221013160841.jpg" alt="DNA Study" class="w-full h-64 object-cover rounded-2xl shadow-lg transition-transform transform hover:scale-105" />
+    </section>
+  </main>
+
+  <script>
+    ScrollReveal().reveal('.fade-in-up', { delay: 200, distance: '30px', origin: 'bottom' });
+    ScrollReveal().reveal('.feature', { delay: 400, interval: 200, distance: '20px', origin: 'bottom' });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      axios.post('https://jsonplaceholder.typicode.com/posts', Object.fromEntries(formData.entries()))
+        .then(() => {
+          document.getElementById('confirmation').classList.remove('hidden');
+          this.reset();
+        })
+        .catch(() => alert('Something went wrong. Please try again.'));
+    });
+
+    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      axios.post('https://jsonplaceholder.typicode.com/posts', Object.fromEntries(formData.entries()))
+        .then(() => {
+          document.getElementById('subConfirmation').classList.remove('hidden');
+          this.reset();
+        })
+        .catch(() => alert('Subscription failed. Please try again.'));
+    });
+  </script>
+</body>
+</html>
