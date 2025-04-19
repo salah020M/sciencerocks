@@ -3,146 +3,260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Science Landing Page</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>GameVerse Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #1f1c2c, #928dab);
+      --primary: #ff3cac;
+      --secondary: #784ba0;
+      --accent: #2b5876;
+      --light: #fff;
+      --dark: #1f1f2e;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     html {
       scroll-behavior: smooth;
     }
-
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1s ease forwards;
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--light);
+      overflow-x: hidden;
     }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    header {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: fadeInDown 1s ease-in-out;
     }
-
-    .bounce-in {
-      animation: bounce 1.5s infinite alternate;
+    header h1 {
+      font-size: 28px;
+      color: var(--primary);
     }
-
-    @keyframes bounce {
-      0% {
-        transform: translateY(0px);
-      }
-      100% {
-        transform: translateY(-8px);
-      }
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: var(--light);
+      font-weight: bold;
+      transition: color 0.3s;
     }
-
-    .glow-hover:hover {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    nav a:hover {
+      color: var(--primary);
     }
-
-    .pulse {
-      animation: pulse 2s infinite;
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 60px;
+      gap: 40px;
+      animation: fadeIn 2s ease-in-out;
     }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
+    .hero-text h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .hero-text p {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    .hero-text button {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .hero-text button:hover {
+      transform: scale(1.05);
+    }
+    .hero img {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    .features {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      background: #121212;
+    }
+    .feature {
+      background: #1e1e2f;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(255, 60, 172, 0.2);
+    }
+    .feature img {
+      height: 64px;
+      margin-bottom: 20px;
+    }
+    .feature h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+    .feature p {
+      font-size: 16px;
+      color: #ccc;
+    }
+    .downloads {
+      text-align: center;
+      padding: 60px;
+      background: #1f1f2e;
+    }
+    .downloads h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    .downloads a img {
+      height: 60px;
+      margin: 10px;
+      transition: transform 0.3s;
+    }
+    .downloads a img:hover {
+      transform: scale(1.05);
+    }
+    .subscribe {
+      background: #2b2b3c;
+      padding: 60px;
+      text-align: center;
+    }
+    .subscribe h2 {
+      color: var(--primary);
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .subscribe form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 0 auto;
+      gap: 16px;
+    }
+    .subscribe input {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+    }
+    .subscribe button {
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 24px;
+      font-size: 14px;
+      color: #777;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-pink-500 via-purple-500 to-red-500 text-white px-6 py-12 font-sans">
+<body>
+  <header>
+    <h1>GameVerse</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#games">Games</a>
+      <a href="#features">Features</a>
+    </nav>
+  </header>
 
-  <main class="min-h-screen">
-    <section class="max-w-5xl mx-auto text-center fade-in-up">
-      <img src="https://orchestration.civitai.com/v2/consumer/blobs/8R6WN7806MBCTBF2K0F50Q4TM0.jpeg" alt="Science Banner" class="rounded-xl shadow-2xl mb-10 w-full h-80 object-cover">
-      <h1 class="text-5xl font-bold mb-6 bounce-in text-yellow-300 glow-hover">Explore the Frontiers of Science</h1>
-      <p class="text-lg mb-8 max-w-2xl mx-auto bounce-in text-cyan-200 glow-hover">
-        Dive into the world of cutting-edge research, innovative discoveries, and scientific breakthroughs that are shaping our future.
-      </p>
-      <button class="text-lg px-6 py-4 bg-yellow-400 hover:bg-yellow-300 text-black transition-transform transform hover:scale-110 rounded shadow-xl pulse">
-        Get Started
-      </button>
-    </section>
+  <section class="hero">
+    <div class="hero-text">
+      <h2>Level Up Your Play</h2>
+      <p>Dive into a world of thrilling mobile games, power-ups, and endless excitement. Join the GameVerse community now!</p>
+      <button id="scrollToGames">Start Playing</button>
+    </div>
+    <img src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F10%2FMobile-gaming.jpg&w=1920&q=75" alt="Mobile Gaming" />
+  </section>
 
-    <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-      <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl hover:scale-105 transform transition-transform feature">
-        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-40 object-cover rounded mb-4" alt="Research">
-        <h3 class="text-xl font-semibold mb-2 bounce-in ">Innovative Research</h3>
-        <p class="text-white/80">Stay updated with groundbreaking studies across physics, biology, chemistry, and more.</p>
-      </div>
-      <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl hover:scale-105 transform transition-transform feature">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUwPV1Xsktzie6ijfXTo1qNq9jkeml7aLOiFjLD1jHGYqORiYNRu_9R8oOxPaISGj7NFQ&usqp=CAU" class="w-full h-40 object-cover rounded mb-4" alt="Discoveries">
-        <h3 class="text-xl font-semibold mb-2 bounce-in text-lime-300 glow-hover">Scientific Discoveries</h3>
-        <p class="text-white/80">Learn about new discoveries that are changing the way we understand the world.</p>
-      </div>
-      <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl hover:scale-105 transform transition-transform feature">
-        <img src="https://media.licdn.com/dms/image/v2/D5612AQEDRFQqBvpE6w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1721191115960?e=2147483647&v=beta&t=JkS0PtlHFAORnABimfId8Dx72dXMoZU8yOmFoTC-6Pk" class="w-full h-40 object-cover rounded mb-4" alt="Knowledge">
-        <h3 class="text-xl font-semibold mb-2 bounce-in text-orange-300 glow-hover">Knowledge Hub</h3>
-        <p class="text-white/80">Access a library of resources curated by leading scientists and researchers.</p>
-      </div>
-    </section>
+  <section class="features" id="features">
+    <div class="feature">
+      <img src="https://img.icons8.com/fluency/96/controller.png" alt="Game Controller" />
+      <h3>Wide Game Library</h3>
+      <p>Explore hundreds of action, adventure, puzzle, and strategy games all in one place.</p>
+    </div>
+    <div class="feature">
+      <img src="https://s3-alpha.figma.com/hub/file/1761326111/ec059bfb-4b20-4cc6-a1dd-1b75221980e4-cover.png" alt="Leaderboards" />
+      <h3>Global Leaderboards</h3>
+      <p>Climb the charts, compete with friends, and become a legend across the globe.</p>
+    </div>
+    <div class="feature">
+      <img src="https://img.icons8.com/fluency/96/trophy.png" alt="Trophies" />
+      <h3>Daily Rewards</h3>
+      <p>Earn trophies, coins, and bonuses every time you log in and play.</p>
+    </div>
+  </section>
 
-    <section class="mt-32 max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-8 bounce-in text-pink-300 glow-hover">Have Questions? Get in Touch</h2>
-      <form id="contactForm" class="grid gap-6 text-left">
-        <input name="name" placeholder="Your Name" class="bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" required />
-        <input name="email" type="email" placeholder="Your Email" class="bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" required />
-        <textarea name="message" placeholder="Your Message" class="bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" rows="5" required></textarea>
-        <button type="submit" class="bg-yellow-400 hover:bg-yellow-300 text-black text-lg py-3 rounded">
-          Send Message
-        </button>
-        <p id="confirmation" class="text-green-200 text-xl hidden">Thank you for your message! We'll get back to you soon.</p>
-      </form>
-    </section>
+  <!-- GAMES SECTION (TARGET) -->
+  <section id="games" style="padding: 100px 60px; background: #111;">
+    <h2 style="color: var(--primary); font-size: 36px; text-align: center; margin-bottom: 20px;">🎮 Our Games</h2>
+    <p style="color: #ccc; text-align: center;">Exciting games are waiting for you here. This is your playground!</p>
+  </section>
 
-    <section class="mt-32 max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 bounce-in text-teal-300 glow-hover">Subscribe for Updates</h2>
-      <form id="subscribeForm" class="grid md:grid-cols-3 gap-4 text-left">
-        <input name="email" type="email" placeholder="Enter your email" class="md:col-span-2 bg-white/10 border-none text-white placeholder-white/60 px-4 py-3 rounded" required />
-        <button type="submit" class="bg-green-500 hover:bg-green-400 text-lg py-3 rounded">
-          Subscribe
-        </button>
-      </form>
-      <p id="subConfirmation" class="text-green-200 text-xl hidden mt-4">Thanks for subscribing!</p>
-    </section>
+  <section class="downloads">
+    <h2>Download Our App</h2>
+    <a href="https://play.google.com/store" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play Store" />
+    </a>
+    <a href="https://www.apple.com/app-store/" target="_blank">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Apple App Store" />
+    </a>
+  </section>
 
-    <section class="mt-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lab Tech" class="w-full h-64 object-cover rounded-2xl shadow-lg transition-transform transform hover:scale-105" />
-      <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Microscope Research" class="w-full h-64 object-cover rounded-2xl shadow-lg transition-transform transform hover:scale-105" />
-      <img src="https://d3lzcn6mbbadaf.cloudfront.net/media/details/ANI-20221013160841.jpg" alt="DNA Study" class="w-full h-64 object-cover rounded-2xl shadow-lg transition-transform transform hover:scale-105" />
-    </section>
-  </main>
+  <section class="subscribe" id="contact">
+    <h2>Stay Updated</h2>
+    <form action="https://formspree.io/f/xwplaoee" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
 
+  <footer>
+    &copy; 2025 GameVerse. Play More. Win More.
+  </footer>
+
+  <!-- ✅ Smooth scroll script -->
   <script>
-    ScrollReveal().reveal('.fade-in-up', { delay: 200, distance: '30px', origin: 'bottom' });
-    ScrollReveal().reveal('.feature', { delay: 400, interval: 200, distance: '20px', origin: 'bottom' });
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      axios.post('https://jsonplaceholder.typicode.com/posts', Object.fromEntries(formData.entries()))
-        .then(() => {
-          document.getElementById('confirmation').classList.remove('hidden');
-          this.reset();
-        })
-        .catch(() => alert('Something went wrong. Please try again.'));
-    });
-
-    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      axios.post('https://jsonplaceholder.typicode.com/posts', Object.fromEntries(formData.entries()))
-        .then(() => {
-          document.getElementById('subConfirmation').classList.remove('hidden');
-          this.reset();
-        })
-        .catch(() => alert('Subscription failed. Please try again.'));
+    document.getElementById("scrollToGames").addEventListener("click", function () {
+      const target = document.getElementById("games");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     });
   </script>
 </body>
